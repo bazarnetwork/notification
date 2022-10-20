@@ -16,11 +16,11 @@ provider:
   runtime: python3.8
   environment:
     DYNAMODB_TABLE: ${self:custom.stage}-${self:service}
-    LAMBDA_NOTIFICATION_ARN: ""
+    LAMBDA_NOTIFICATION_ARN: ${LAMBDA_NOTIFICATION_ARN}
   iam:
     role:
       managedPolicies:
-        - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+        - ${MANAGE_POLICIES}
       statements:
         - Effect: Allow
           Action:
@@ -49,7 +49,7 @@ functions:
           method: post
           cors: true
       - sns:
-          arn: arn:aws:sns:us-east-1:762182328030:sns-python
+          arn: ${ARN_SNS}
 resources:
   Resources:
     QuarryDynamoDbTable:
