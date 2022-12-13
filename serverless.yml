@@ -1,0 +1,94 @@
+service: quarry-sms-builder
+
+frameworkVersion: "3"
+plugins:
+  - serverless-python-requirements
+  - serverless-offline
+  - serverless-dynamodb-local
+
+package:
+  exclude:
+    - node_modules/**
+    - venv/**
+provider:
+  name: aws
+  deploymentMethod: direct
+  runtime: python3.8
+  environment:
+    DYNAMODB_TABLE: ${self:custom.stage}-${self:service}
+    LAMBDA_NOTIFICATION_ARN: ${LAMBDA_NOTIFICATION_ARN}
+  iam:
+    role:
+      managedPolicies:
+        - ${MANAGE_POLICIES}
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: arn:aws:dynamodb:*:*:*
+        - Effect: Allow
+          Action:
+            - ses:*
+          Resource: "*"
+        - Effect: Allow
+          Action:
+            - sns:*
+          Resource: "*"
+functions:
+  create-notification:
+    handler: app/index.createNotification
+    name: ${self:custom.stage}-${self:service}-create-notification
+    events:
+      - http:
+          path: create
+          method: post
+          cors: true
+      - sns:
+          arn: ${ARN_SNS}
+resources:
+  Resources:
+    QuarryDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: 'PK'
+            AttributeType: 'S'
+          - AttributeName: 'SK'
+            AttributeType: 'S'
+        KeySchema:
+          - AttributeName: 'PK'
+            KeyType: 'HASH'
+          - AttributeName: 'SK'
+            KeyType: 'RANGE'
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+
+custom:
+
+  # Dynamo Local
+  dynamodb:
+
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: true
+      convertEmptyValues: true
+    seed:
+      baseSeed:
+        sources:
+          - table: ${self:provider.environment.DYNAMODB_TABLE}
+            sources: [ ./seed.json ]
+
+  stages:
+    - dev
+    - prod
+    - test
+    
+  stage: dev
+  region: us-east-1
