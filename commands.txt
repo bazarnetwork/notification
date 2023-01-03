@@ -1,3 +1,0 @@
-pip install -r requirements.txt
-npm i
-sls offline --allowCache
