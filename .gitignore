@@ -130,3 +130,5 @@ dmypy.json
 bazar-contactus/lambda.zip
 bazar-contactus/bootstrap
 notification/dynamodb.zip
+bazar-subscribe-updates/bootstrap
+bazar-subscribe-updates/lambda.zip
