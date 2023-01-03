@@ -53,3 +53,6 @@ __pycache__/
 *.py[cod]
 
 .vscode
+bazar-contactus/bootstrap
+bazar-contactus/lambda.zip
+dynamodb.zip

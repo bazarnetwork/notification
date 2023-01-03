@@ -1,0 +1,30 @@
+[
+    {
+        "PK": "USER#jsierra@cafetosoftware.com",
+        "SK": "USERMETADATA",
+        "name": "Jairo",
+        "middle_name": "Andrés",
+        "last_name": "Sierra",
+        "phone_number": 3193569351
+    },
+    {
+        "PK": "USER#jsierra@cafetosoftware.com",
+        "SK": "SMS_MSG#jgfsd98df390i",
+        "location_code": 57,
+        "timezone": "GMT+5",
+        "phone_number": 3193569351,
+        "message": "Lorem ipsum",
+        "status": "awaiting",
+        "creation_date": "1970-01-01T00:00:00.000Z",
+        "updated_date": "1970-01-01T00:00:00.000Z"
+    },
+    {
+        "PK": "USER#jsierra@cafetosoftware.com",
+        "SK": "EMAIL_MSG#jo67sef09s4390i",
+        "subject": "Test subject",
+        "message": "<body><h1>hi</h1><p>lorem ipsum dolor sit amet</p></body>",
+        "status": "awaiting",
+        "creation_date": "1970-01-01T00:00:00.000Z",
+        "updated_date": "1970-01-01T00:00:00.000Z"
+    }
+]

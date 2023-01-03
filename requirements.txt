@@ -1,7 +1,0 @@
-dataclasses-json==0.5.4
-dataclasses
-pymongo
-dnspython
-Inject
-cerberus
-boto3
