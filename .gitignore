@@ -52,7 +52,17 @@ Thumbs.db
 __pycache__/
 *.py[cod]
 
+
+# Pyre type checker
+.pyre/
+
 .vscode
 bazar-contactus/bootstrap
 bazar-contactus/lambda.zip
 dynamodb.zip
+bazar-contactus/lambda.zip
+bazar-contactus/bootstrap
+notification/dynamodb.zip
+bazar-subscribe-updates/bootstrap
+bazar-subscribe-updates/lambda.zip
+
