@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+bazar-contactus/lambda.zip
+bazar-contactus/bootstrap
+notification/dynamodb.zip
